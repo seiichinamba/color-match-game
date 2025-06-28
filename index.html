@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Match Game - 色合わせゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Color Match Game</h1>
+            <p>目標の色に近づけてスコアを獲得しよう！</p>
+        </header>
+
+        <div class="game-board">
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="label">スコア</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">レベル</span>
+                    <span class="value" id="level">1</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">最高スコア</span>
+                    <span class="value" id="high-score">0</span>
+                </div>
+            </div>
+
+            <div class="color-display">
+                <div class="color-section">
+                    <h3>目標色</h3>
+                    <div class="color-box" id="target-color"></div>
+                    <div class="color-info" id="target-rgb">RGB(?, ?, ?)</div>
+                </div>
+                
+                <div class="vs-indicator">VS</div>
+                
+                <div class="color-section">
+                    <h3>あなたの色</h3>
+                    <div class="color-box" id="player-color"></div>
+                    <div class="color-info" id="player-rgb">RGB(128, 128, 128)</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="slider-group">
+                    <label for="red-slider">赤 (R)</label>
+                    <input type="range" id="red-slider" min="0" max="255" value="128" class="color-slider red-slider">
+                    <span class="slider-value" id="red-value">128</span>
+                </div>
+                
+                <div class="slider-group">
+                    <label for="green-slider">緑 (G)</label>
+                    <input type="range" id="green-slider" min="0" max="255" value="128" class="color-slider green-slider">
+                    <span class="slider-value" id="green-value">128</span>
+                </div>
+                
+                <div class="slider-group">
+                    <label for="blue-slider">青 (B)</label>
+                    <input type="range" id="blue-slider" min="0" max="255" value="128" class="color-slider blue-slider">
+                    <span class="slider-value" id="blue-value">128</span>
+                </div>
+            </div>
+
+            <div class="game-actions">
+                <button id="submit-btn" class="btn btn-primary">色を決定！</button>
+                <button id="new-game-btn" class="btn btn-secondary">新しいゲーム</button>
+            </div>
+
+            <div class="result-display" id="result-display">
+                <div class="accuracy" id="accuracy"></div>
+                <div class="points" id="points-earned"></div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>🎯 遊び方</h3>
+            <ul>
+                <li>目標色と同じ色を作ってください</li>
+                <li>RGBスライダーを調整して色を変更</li>
+                <li>正確度が高いほど高得点！</li>
+                <li>連続成功でレベルアップ</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
