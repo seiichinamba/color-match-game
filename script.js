@@ -38,28 +38,28 @@ class ColorMatchGame {
     }
     
     setupEventListeners() {
-        // スライダーイベント
-        this.elements.redSlider.addEventListener('input', () => this.updatePlayerColor());
-        this.elements.greenSlider.addEventListener('input', () => this.updatePlayerColor());
-        this.elements.blueSlider.addEventListener('input', () => this.updatePlayerColor());
+        // スライダーイベント（デバウンス処理でパフォーマンス向上）
+        const debouncedUpdateColor = this.debounce(() => this.updatePlayerColor(), 16); // 60fps制限
+        this.elements.redSlider.addEventListener('input', debouncedUpdateColor);
+        this.elements.greenSlider.addEventListener('input', debouncedUpdateColor);
+        this.elements.blueSlider.addEventListener('input', debouncedUpdateColor);
         
-        // ボタンイベント
-        this.elements.submitBtn.addEventListener('click', () => this.submitAnswer());
+        // ボタンイベント（ダブルクリック防止付き）
+        this.elements.submitBtn.addEventListener('click', this.debounce(() => {
+            this.submitAnswer();
+        }, 300));
         this.elements.newGameBtn.addEventListener('click', () => this.newGame());
         
         // キーボードショートカット
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
+                event.preventDefault();
                 this.submitAnswer();
             } else if (event.key === 'r' || event.key === 'R') {
+                event.preventDefault();
                 this.newGame();
             }
         });
-        
-        // ダブルクリック防止
-        this.elements.submitBtn.addEventListener('click', this.debounce(() => {
-            this.submitAnswer();
-        }, 300));
     }
     
     // デバウンス関数
